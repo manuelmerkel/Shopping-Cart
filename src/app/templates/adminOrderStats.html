@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Order Statistics
+{% endblock %}
+
+{% block content %}
+<div class="display">
+	<table border="1">
+        <thead>
+            <tr>
+                <th>{{ cloumnHeaders[0] }}</th>
+                {% for header in cloumnHeaders[1:] %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in tableValues %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                {% for cell in row[1:] %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

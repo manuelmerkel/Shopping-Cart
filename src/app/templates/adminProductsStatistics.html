@@ -1,0 +1,33 @@
+<div class="display">
+            <table border="1">
+            <thead>
+                <tr>
+                    <th>Product / Category</th>
+                    {% for category in statistics.keys() %}
+                        <th>{{ category }}</th>
+                    {% endfor %}
+                    <th>Total per Product</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name in total_per_product.keys() %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        {% for category in statistics.keys() %}
+                            <td>{{ statistics.get(category, {}).get(name, 0) }}</td>
+                        {% endfor %}
+                        <td>{{ total_per_product[name] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total per Category</th>
+                    {% for total in total_per_category.values() %}
+                        <th>{{ total }}</th>
+                    {% endfor %}
+                    <th>{{ grand_total }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Product
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href={{url_for('static', filename='css/productDescription.css')}} />
+{% endblock %}
+
+{% block content %}
+<div id="display">
+	<div id="productName">
+		<h1>{{data.product_name}}</h1>
+	</div>
+	<div>
+		<img src={{url_for('static', filename='uploads/'+data.image) }} id="productImage"/>
+	</div>
+
+	<div id="product-description">
+		<h2>Details</h2>
+		<table id="descriptionTable">
+			<tr>
+				<td>Name</td>
+				<td>{{data.name}}</td>
+			</tr>
+			<tr>
+				<td>Price</td>
+				<td>${{data.price}}</td>
+			</tr>
+			<tr>
+				<td>Stock</td>
+				<td>{{data.stock}}</td>
+			</tr>
+		</table>
+		<h2>Description</h2>
+		<p>{{data.description}}</p>
+	</div>
+	<div id="add-to-cart">
+		<a href="/add-to-cart?productId={{request.args.get('productId')}}">Add to Cart</a>
+	</div>
+</div>
+{% endblock %}
+

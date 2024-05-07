@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
+{% endblock %}
+
+{% block content %}
+<div class="display">
+	<div class="display-category">
+		<h2>Shop by Category: </h2>
+		<ul>
+			{% for row in categoryData %}
+			<li><a href="/display-category?categoryId={{row.category_id}}">{{row.category_name}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div>
+		<h2>Items</h2>
+		<table>
+			{% for data in itemData %}
+			<tr>
+				<td>{{ data.product_name }}</td>
+				<td>
+					<a href="/product-description?productId={{data.product_id}}">
+						<img src={{ url_for('static', filename='uploads/' + data.image) }} id="itemImage" />
+					</a>
+				</td>
+				<td>${{ data.price }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+	</div>
+</div>
+{% endblock %}
+

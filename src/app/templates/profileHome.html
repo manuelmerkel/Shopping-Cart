@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href={{ url_for('static', filename='css/profileHome.css') }} />
+{% endblock %}
+
+{% block content %}
+
+<div class="display">
+	<a href="/account/profile/edit">Edit Profile</a><br>
+	<a href="/account/profile/change-password">Change password</a>
+</div>
+{% endblock %}
+

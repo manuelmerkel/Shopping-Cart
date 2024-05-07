@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+{{ toastr.include_jquery() }}
+{{ toastr.include_toastr_css() }}
+{{ toastr.message() }}
+<title>Category: {{categoryName}}</title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+</head>
+<body>
+{{ toastr.include_toastr_js() }}
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+	</a>
+	<form>
+		<input id="searchBox" type="text" name="searchQuery">
+		<input id="searchButton" type="submit" value="Search">
+	</form>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/login-form">Sign In</a>
+	</div>
+	{% else %}
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<a href="/admin">Admin area</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART {{noOfItems}}
+		</a>
+	</div>
+</div>
+
+<div>
+	<h2>Showing all products of Category {{categoryName}}:</h2>
+	{% for itemData in data %}
+	<table>
+		<tr id="productName">
+			<td>
+				{{itemData.product_name}}
+			</td>
+		</tr>
+		<tr id="productImage">
+			<td>
+				<a href="/product-description?productId={{itemData.product_id}}">
+					<img src={{ url_for('static', filename='uploads/' + itemData.image) }} id="itemImage" />
+				</a>
+			</td>
+		</tr>
+		<tr id="productPrice">
+			<td>
+				${{itemData.price}}
+			</td>
+		</tr>
+	</table>
+	{% endfor %}
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+{{ toastr.include_jquery() }}
+{{ toastr.include_toastr_css() }}
+{{ toastr.message() }}
+<title>Remove</title>
+<link rel="stylesheet" href={{url_for('static', filename='css/remove.css')}}/>
+</head>
+<body>
+{{ toastr.include_toastr_js() }}
+<table>
+	{% for i in range(6) %}
+	<tr>
+		{% for row in data %}
+		<td>
+			<a href="/remove-item?productId={{row.product_id}}">
+			{% if i == 4 %}
+				<img src={{ url_for('static', filename='uploads/' + row.image) }} id="itemImage" />
+			{% else %}
+<!--				TODO-->
+				<h1>{{i}}</h1>
+			{% endif %}
+			</a>
+		</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+</table>
+</body>
+</html>

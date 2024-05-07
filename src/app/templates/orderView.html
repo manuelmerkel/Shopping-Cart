@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Your orders
+{% endblock %}
+
+
+{% block content %}
+<div>
+    <h1>Your orders, {{ firstName }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                {% for product in products %}
+                <th>{{ product }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_id, products in order_data.items() %}
+            <tr>
+                <td>{{ order_id }}</td>
+                {% for product in products %}
+                <td>{{ order_data[order_id].get(product, 0) }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}

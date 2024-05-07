@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Your cart
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href={{ url_for('static', filename='css/cart.css') }} />
+{% endblock %}
+
+{% block content %}
+<div id="cartItems">
+	<h2>Shopping Cart</h2>
+	<div id="tableItems">
+		{% for row in products %}
+		<div>
+			<hr id="seperator">
+			<div id="itemImage">
+				<img src={{url_for('static', filename='uploads/'+row.image)}} id="image"/>
+			</div>
+			<div id="itemName">
+				<span id="itemNameTag">{{row.product_name}}</span><br>
+				In stock<br>
+				<a href="/remove-from-cart?productId={{row.product_id}}">Remove</a>
+			</div>
+			<div id="itemPrice">
+				${{row.price}}
+			</div>
+		</div>
+		{% endfor %}
+		<hr id="seperator">
+		<div id="total">
+			<span id="subtotal">Subtotal</span> : ${{totalPrice}}
+		</div>
+	</div>
+</div>
+{% if noOfItems > 0 %}
+<a href="/checkout">Place order</a>
+{% endif %}
+{% endblock %}

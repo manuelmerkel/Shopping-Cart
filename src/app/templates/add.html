@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+{{ toastr.include_jquery() }}
+{{ toastr.include_toastr_css() }}
+{{ toastr.message() }}
+<title>Admin</title>
+</head>
+<body>
+{{ toastr.include_toastr_js() }}
+<h2>Add items</h2>
+<form action="/add-item" method="POST" enctype="multipart/form-data">
+	Name: <input type="text" name="product-name"><br>
+	Price: <input type="text" name="price"><br>
+	Description: <textarea name="description" rows=3 cols="40"></textarea><br>
+	Image: <input type="file" name="image"><br>
+	Stock: <input type="text" name="stock"><br>
+	Category: <select name="category">
+		{% for row in categories %}
+			<option value="{{row.category_id}}">{{row.category_name}}</option>
+		{% endfor %}
+	</select><br>
+	<input type="submit">
+</form>
+</body>
+</html>
+
