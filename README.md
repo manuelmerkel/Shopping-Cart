@@ -23,3 +23,7 @@ Sample credentials present in existing database:
 Username - sample@example.com
 Password - sample
 
+# SQLite Migration Alembic
+1. Migrationsskript erstellen: ``alembic revision --autogenerate -m "Initial migration"``
+2. Migrationen anwenden: ``alembic upgrade head``
+
