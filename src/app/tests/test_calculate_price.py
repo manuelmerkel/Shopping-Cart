@@ -40,6 +40,11 @@ class TestCalculatePrice(unittest.TestCase):
         total = calculate_product_sum_with_discount_util(prices)
         self.assertEqual(1, total)
 
+    def test_some_discount(self):
+        prices = [10, 11, 9, 10]
+        total = calculate_product_sum_with_discount_util(prices)
+        self.assertEqual(22, total)
+
 
 if __name__ == '__main__':
     unittest.main()

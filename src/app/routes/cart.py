@@ -82,16 +82,23 @@ def checkout():
 def cart():
     ses = g.session
     cart_with_product_info = CartController(ses).get_cart_with_product_info_by_user_id(session["user_id"])
-    total_price = calculate_product_sum_with_discount_util([item['price'] for item in cart_with_product_info])
+    total_price = calculate_product_sum_with_discount_util(cart_with_product_info)
 
     return render_template("cart.html", products=cart_with_product_info, totalPrice=total_price,
                            loggedIn=session["logged_in"], firstName=session["first_name"],
                            noOfItems=session["no_of_items"])
 
 
-def calculate_product_sum_with_discount_util(prices: list[int]) -> float:
+def calculate_product_sum_with_discount_util(products: list[dict[str, int | str]]) -> float:
+    """
+    Parameter beinhaltet Informationen über den Warenkorb und die darin enthaltenen Produkte.
+    In einem product befinden sich Informationen über den Preis: product["price"]. Siehe unten.
+
+    :param products:
+    :return:
+    """
     # TODO: Implementieren eines speziellen Rabattes
     total_price = 0
-    for price in prices:
-        total_price += price
+    for product in products:
+        total_price += product["price"]
     return total_price
