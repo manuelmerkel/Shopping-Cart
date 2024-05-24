@@ -2,16 +2,16 @@ from pprint import pprint
 
 from flask import Blueprint, g, render_template, request, session
 
-from controllers.category import CategoryController
-from controllers.product import ProductController
-from routes.user import login_required, logged_in
+from src.app.controllers.category import CategoryController
+from src.app.controllers.product import ProductController
+from src.app.routes.user import login_required, logged_in
 
 display_category_blueprint = Blueprint("display_category", __name__, url_prefix="/display-category")
 add_category_form_blueprint = Blueprint("add_category_form", __name__, url_prefix="/add")
 root_blueprint = Blueprint("root", __name__)
 
 
-@root_blueprint.route("/")  # TODO schauen wo hin
+@root_blueprint.route("/")
 @logged_in
 def root():
     ses = g.session

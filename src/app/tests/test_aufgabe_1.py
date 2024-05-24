@@ -1,6 +1,6 @@
 import unittest
 
-from routes.cart import calculate_product_sum_with_discount_util
+from src.app.routes.cart import calculate_product_sum_with_discount_util
 
 
 class TestCalculatePrice(unittest.TestCase):

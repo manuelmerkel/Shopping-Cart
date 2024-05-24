@@ -1,7 +1,7 @@
 from flask import Blueprint, g, session, render_template
 
-from controllers.orders import OrderController
-from routes.user import login_required
+from src.app.controllers.orders import OrderController
+from src.app.routes.user import login_required
 
 orders_blueprint = Blueprint("orders", __name__, url_prefix="/account/orders")
 

@@ -3,8 +3,8 @@ from pprint import pprint
 from pydantic import TypeAdapter
 from sqlalchemy import select
 
-from models.product import Product as ProductModel
-from schemas.product import Product as ProductSchema
+from src.app.models.product import Product as ProductModel
+from src.app.schemas.product import Product as ProductSchema
 from .base import Controller
 
 

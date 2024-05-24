@@ -3,9 +3,9 @@ from functools import wraps
 
 from flask import Blueprint, g, session, render_template, request, flash, redirect, url_for
 
-from controllers.cart import CartController
-from controllers.user import UserController
-from schemas.user import User
+from src.app.controllers.cart import CartController
+from src.app.controllers.user import UserController
+from src.app.schemas.user import User
 
 change_pw_blueprint = Blueprint("change_password", __name__, url_prefix="/account/profile/change-password")
 profile_blueprint = Blueprint("profile", __name__, url_prefix="/account/profile/edit")

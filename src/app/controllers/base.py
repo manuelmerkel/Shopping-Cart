@@ -2,7 +2,7 @@ from typing import Generic, TypeVar
 
 from sqlalchemy.orm.session import Session
 
-from models.base import BaseModel
+from src.app.models.base import BaseModel
 
 Model = TypeVar("Model", bound=BaseModel)
 

@@ -3,9 +3,9 @@ from typing import Any, Sequence
 from pydantic import TypeAdapter
 from sqlalchemy import select, and_, func, Row, RowMapping
 
-from models.cart import Cart as CartModel
-from models.product import Product as ProductModel
-from schemas.cart import Cart as CartSchema
+from src.app.models.cart import Cart as CartModel
+from src.app.models.product import Product as ProductModel
+from src.app.schemas.cart import Cart as CartSchema
 from .base import Controller
 
 
@@ -59,7 +59,6 @@ class CartController(Controller[CartModel]):
             raise e
 
     def get_cart_with_product_info_by_user_id(self, user_id: int) -> list:
-        # TODO hier kann man das noch schöner machen
         stmt = select(CartModel, ProductModel)\
             .join(ProductModel, ProductModel.product_id == CartModel.product_id)\
             .where(CartModel.user_id == user_id)
@@ -81,12 +80,11 @@ class CartController(Controller[CartModel]):
         return combined_results
 
     def get_order_with_product_info(self, user_id: int) -> list:
-        # TODO hier kann man das noch schöner machen
         stmt = select(CartModel.product_id, func.count(CartModel.product_id).label("quantity"),
                       func.sum(ProductModel.price).label("total")) \
             .join(ProductModel, ProductModel.product_id == CartModel.product_id) \
             .where(CartModel.user_id == user_id) \
-            .group_by(CartModel.product_id)  # TODO
+            .group_by(CartModel.product_id)
         order_with_product_info = self.session.execute(stmt).fetchall()
         order_with_product_info = TypeAdapter(list).validate_python(order_with_product_info)
 

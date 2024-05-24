@@ -1,10 +1,10 @@
 from flask import Blueprint, g, session, render_template, request, flash, redirect, url_for
 
-from controllers.cart import CartController
-from controllers.order_item import OrderItemController
-from controllers.orders import OrderController
-from controllers.product import ProductController
-from routes.user import login_required
+from src.app.controllers.cart import CartController
+from src.app.controllers.order_item import OrderItemController
+from src.app.controllers.orders import OrderController
+from src.app.controllers.product import ProductController
+from src.app.routes.user import login_required
 
 remove_from_cart_blueprint = Blueprint("remove_from_cart", __name__, url_prefix="/remove-from-cart")
 cart_blueprint = Blueprint("cart", __name__, url_prefix="/cart")

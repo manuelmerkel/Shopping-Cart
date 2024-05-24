@@ -1,8 +1,8 @@
-from controllers.product import ProductController
+from src.app.controllers.product import ProductController
 from flask import Blueprint, g, session, render_template, request, flash, redirect, url_for
 
-from routes.user import login_required, logged_in
-from schemas.product import Product
+from src.app.routes.user import login_required, logged_in
+from src.app.schemas.product import Product
 from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = {'jpeg', 'jpg', 'png', 'gif'}

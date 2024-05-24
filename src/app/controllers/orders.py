@@ -1,13 +1,10 @@
-from pprint import pprint
-
+from src.app.models.order_item import OrderItem as OrderItemModel
+from src.app.models.orders import Order as OrderModel
+from src.app.models.product import Product as ProductModel
 from pydantic import TypeAdapter
+from src.app.schemas.orders import Order as OrderSchema
 from sqlalchemy import select
 
-from models import orders
-from models.orders import Order as OrderModel
-from schemas.orders import Order as OrderSchema
-from models.order_item import OrderItem as OrderItemModel
-from models.product import Product as ProductModel
 from .base import Controller
 
 
@@ -36,7 +33,7 @@ class OrderController(Controller[OrderModel]):
             self.session.rollback()
             raise e
 
-    def get_orders_with_product_info(self) -> list[list[str]]:
+    def get_orders_with_product_info(self) -> list[list[str | int]]:
         stmt = select(OrderModel, OrderItemModel, ProductModel) \
             .join(OrderItemModel, OrderItemModel.order_id == OrderModel.order_id) \
             .join(ProductModel, ProductModel.product_id == OrderItemModel.product_id)
@@ -47,7 +44,7 @@ class OrderController(Controller[OrderModel]):
         for order, order_item, product in orders_with_product_info:
             combined_result = [
                 str(order_item.order_item_id),
-                str(order.order_id),
+                order.order_id,
                 str(product.product_name)
             ]
 

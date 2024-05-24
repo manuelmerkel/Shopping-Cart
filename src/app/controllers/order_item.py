@@ -1,4 +1,4 @@
-from models.order_item import OrderItem as OrderItemModel
+from src.app.models.order_item import OrderItem as OrderItemModel
 
 from .base import Controller
 
